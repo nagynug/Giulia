@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>para Giulia</title>
+<style>
+  body {
+    background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #880e4f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+  }
+  .container {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(136,14,79,0.2);
+    max-width: 400px;
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+  }
+  button {
+    background-color: #ad1457;
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+  button:hover {
+    background-color: #880e4f;
+  }
+  input[type="text"] {
+    font-size: 1rem;
+    padding: 8px 12px;
+    border: 2px solid #880e4f;
+    border-radius: 8px;
+    width: 60%;
+    margin-right: 12px;
+    outline: none;
+    transition: border-color 0.25s ease;
+  }
+  input[type="text"]:focus {
+    border-color: #ad1457;
+  }
+  .hidden {
+    display: none;
+  }
+  .message {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .message.success {
+    color: #2e7d32;
+  }
+  .message.error {
+    color: #c62828;
+  }
+</style>
+</head>
+<body>
+  <div class="container" id="container">
+    <h1>oiiiii!</h1>
+    <p id="intro-text">
+      eu tenho uma pergunta pra você.
+    </p>
+    <button id="btn-continue">Continuar</button>
+
+    <div id="pedido-section" class="hidden">
+      <p style="font-size: 1.3rem; font-weight: 700; margin-bottom: 15px;">
+       Giulia, você quer casar comigo?
+      </p>
+      <input type="text" id="resposta" placeholder="Digite 'sim' ou 'não'" maxlength="3" />
+      <button id="btn-enviar">Enviar</button>
+      <p id="msg-resultado" class="message"></p>
+    </div>
+  </div>
+
+  <script>
+    const btnContinue = document.getElementById("btn-continue");
+    const pedidoSection = document.getElementById("pedido-section");
+    const introText = document.getElementById("intro-text");
+    const btnEnviar = document.getElementById("btn-enviar");
+    const respostaInput = document.getElementById("resposta");
+    const msgResultado = document.getElementById("msg-resultado");
+
+    btnContinue.addEventListener("click", () => {
+      introText.classList.add("hidden");
+      btnContinue.classList.add("hidden");
+      pedidoSection.classList.remove("hidden");
+      respostaInput.focus();
+    });
+
+    btnEnviar.addEventListener("click", () => {
+      let resposta = respostaInput.value.trim().toLowerCase();
+
+      if (resposta === "sim") {
+        msgResultado.textContent = "EBAAAA! vamos planejar nosso futuro juntas e decidir os nomes dos nossos gatinhos.";
+        msgResultado.className = "message success";
+      } else if (resposta === "não") {
+        msgResultado.textContent = "infelizmente nao posso ter tudo na vida :(";
+        msgResultado.className = "message error";
+      } else {
+        msgResultado.textContent = "digite sim ou não somente.";
+        msgResultado.className = "message error";
+      }
+    });
+
+    respostaInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        btnEnviar.click();
+      }
+    });
+  </script>
+</body>
+</html>
+
